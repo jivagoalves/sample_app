@@ -214,6 +214,10 @@ table.microposts tr td.micropost {
   padding-top: 10px;
 }
 
+table.microposts tr td.button {
+  border-top: 1px solid #ccc;
+}
+
 table.microposts tr td.micropost span.timestamp {
   display: block;
   font-size: 85%;
