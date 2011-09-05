@@ -2,11 +2,22 @@ class MicropostsController < ApplicationController
   before_filter :authenticate, :only => [:create, :destroy]
   before_filter :authorized_user, :only => :destroy
 
+  def index
+    @user = User.find_by_id(params[:user_id])
+  end
+
   def create
     @micropost  = current_user.microposts.build(params[:micropost])
     if @micropost.save
-      flash[:success] = "Micropost created!"
-      redirect_to root_path
+      respond_to do |format|
+        format.html {
+          redirect_to root_path
+          flash[:success] = "Micropost created!"
+        }
+        format.js {
+          flash.now[:success] = "Micropost created!"
+        }
+      end
     else
       @feed_items = []
       render 'pages/home'
@@ -15,7 +26,10 @@ class MicropostsController < ApplicationController
 
   def destroy
     @micropost.destroy
-    redirect_back_or root_path
+    respond_to do |format|
+      format.html { redirect_back_or root_path }
+      format.js
+    end
   end
 
   private

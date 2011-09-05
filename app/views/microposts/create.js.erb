@@ -1,0 +1,5 @@
+$("#notice").html('<div class="notice success"><%= escape_javascript(flash[:success]) %></div>').hide().fadeIn(1000);
+$("span.microposts").html("<%= pluralize(@micropost.user.microposts.count, 'micropost') %>");
+$("table.microposts tbody").prepend("<%= escape_javascript(render(:partial => 'shared/feed_item', :object => @micropost )) %>");
+$("table.microposts tbody tr:first").hide().fadeIn(1000);
+$("#new_micropost")[0].reset();

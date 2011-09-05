@@ -1,0 +1,11 @@
+/* 
+   Deleting table row
+ */
+$("<%= "#micropost-#{@micropost.id}" %>").fadeOut("fast", function(){
+  $("<%= "#micropost-#{@micropost.id}" %>").remove();
+});
+
+/*
+   Updating microposts counter
+ */
+$("span.micropost-counter").html("<%= @micropost.user.microposts.count %>");
